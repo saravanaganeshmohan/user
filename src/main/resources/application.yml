@@ -1,0 +1,44 @@
+server:
+  port: 9080
+  servlet:
+    context-path: /api/v1/
+spring:
+  datasource:
+    url: jdbc:h2:mem:user
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+#    generate-unique-name: false
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+#    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+  h2:
+    console.enabled: false
+media:
+  storage:
+    path: "src/main/resources/document/"
+    deletePath: "src/main/resources/document/delete/"
+    viewPath: "src/main/resources/document/view/"
+
+thirdParty:
+  API: "https://my-json-server.typicode.com/saravanaganeshmohan/third-party"
+  max-retry-count: 3
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    use-root-path: true
+    path: "/swagger-ui.html"
+
+secret:
+  key: "AvbSkj3BVbf4o6mdlAofDp0/"
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.bank.user.application.openfeign.ThirdPartyAPIFallback
+        loggerLevel: BASIC
+        retryer: com.bank.user.application.openfeign.CustomRetryer
